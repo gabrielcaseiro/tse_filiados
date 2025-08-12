@@ -7,7 +7,6 @@
 
 library(tidyverse)
 library(httr)
-library(arrow)
 
 # 1. Get API ids ----
 
@@ -181,17 +180,3 @@ rm(fili)
 }
 
 rm(list = ls())
-
-# 3. Consolidate single .parquet file ----
-
-files<-list.files('output','list_filiados',full.names = T)  
-
-  fili<-lapply(files, function(f){
-    
-    readRDS(f)
-    
-  })
-  
-  fili<-rbindlist(fili,fill = T)
-  
-  write_parquet(fili,'output/filiados.parquet')
